@@ -33,8 +33,34 @@
   tr:last-child td{border-bottom:none}
   a.mail{color:var(--mint);font-weight:600}
   footer{margin-top:56px;padding-top:24px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-align:center}
+  /* 홍보웹과 동일한 상단 GNB */
+  body{padding-top:0}
+  .site-gnb a{text-decoration:none}
+  .site-gnb{position:sticky;top:0;z-index:30;background:rgba(252,250,241,.9);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line)}
+  .site-gnb .row{max-width:1120px;margin:0 auto;padding:0 22px;height:66px;display:flex;align-items:center;justify-content:space-between}
+  .site-gnb .gbrand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;color:var(--ink)}
+  .site-gnb .gbrand img{width:36px;height:36px;border-radius:11px}
+  .site-gnb .gbrand b{color:var(--mint)}
+  .site-gnb nav{display:flex;gap:26px;font-size:15px;font-weight:600;color:var(--muted)}
+  .site-gnb nav a{color:var(--muted);transition:color .2s}
+  .site-gnb nav a:hover{color:var(--mint)}
+  .site-gnb .gcta{background:var(--ink);color:#fff;padding:9px 18px;border-radius:14px;font-size:14px;font-weight:700}
+  .wrap{padding-top:40px}
+  @media(max-width:720px){.site-gnb nav{display:none}}
 </style></head>
-<body><div class="wrap">
+<body>
+<div class="site-gnb"><div class="row">
+  <a class="gbrand" href="index.html"><img src="assets/icon.png" alt="도란도란"/><span>도란<b>도란</b></span></a>
+  <nav>
+    <a href="index.html#chat">대화 체험</a>
+    <a href="index.html#why">특징</a>
+    <a href="index.html#maker">친구 만들기</a>
+    <a href="index.html#plans">요금</a>
+  </nav>
+  <a class="gcta" href="index.html#band">시작하기</a>
+</div></div>
+<div class="wrap">
   <header>
     <div class="brand">도란도란</div>
     <h1>계정 및 데이터 삭제 안내</h1>

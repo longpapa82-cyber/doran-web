@@ -91,7 +91,7 @@ img{max-width:100%;display:block}
 .nav.scrolled{background:rgba(252,250,241,.9);box-shadow:0 1px 0 var(--line)}
 .nav .row{display:flex;align-items:center;justify-content:space-between;height:66px}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px}
-.brand .mark{width:36px;height:36px}
+.brand .mark{width:36px;height:36px;border-radius:11px}
 .brand b{color:var(--mint-dark)}
 .nav nav{display:flex;gap:26px;font-size:15px;font-weight:600;color:var(--slate)}
 .nav nav a{position:relative;padding:4px 0;transition:color .2s}
@@ -304,6 +304,9 @@ section.block{padding:120px 0;position:relative}
 /* ============================================================
    요금
    ============================================================ */
+/* 요금은 카드가 짧아 하단 여백 축소, 안전안내와 자연스럽게 이어지게 */
+#plans{padding-bottom:64px}
+.safety-band{padding-top:40px;padding-bottom:96px}
 .plans{margin-top:52px;display:grid;grid-template-columns:repeat(2,1fr);gap:24px;max-width:760px;margin-inline:auto}
 .plan{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);padding:34px 30px;position:relative}
 .plan.pro{border:2px solid var(--mint);box-shadow:0 14px 40px rgba(20,187,194,.16);animation:proGlow 3.4s ease-in-out infinite}
@@ -348,7 +351,7 @@ section.block{padding:120px 0;position:relative}
 footer.ft{padding:56px 0 64px;border-top:1px solid var(--line)}
 .ft .frow{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
 .ft .flogo{display:flex;align-items:center;gap:10px;font-weight:800}
-.ft .flogo .mark{width:32px;height:32px}
+.ft .flogo .mark{width:32px;height:32px;border-radius:10px}
 .ft .flinks{display:flex;gap:22px;font-size:14.5px;font-weight:600;color:var(--slate);flex-wrap:wrap}
 .ft .flinks a:hover{color:var(--mint-dark)}
 .ft .copy{color:var(--slate);font-size:13px;margin-top:22px}
