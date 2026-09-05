@@ -319,10 +319,16 @@ section.block{padding:120px 0;position:relative}
 .plan li{transition:transform .3s var(--ease)}
 .plan:hover li{transform:translateX(3px)}
 .plan h3{font-size:22px;font-weight:800;margin-bottom:6px}
-.plan .price{font-size:16px;color:var(--slate);margin-bottom:18px}
+.plan .price{font-size:16px;color:var(--slate);margin-bottom:6px}
+.plan .price-num{font-size:22px;font-weight:800;color:var(--ink)}
+.plan .price-per{font-size:14px;color:var(--slate);font-weight:500}
+.plan .price-year{font-size:14px;color:var(--mint-dark);font-weight:600;margin-bottom:18px}
+.plan .price-year strong{font-weight:800}
+.plan:not(.pro) .price{margin-bottom:18px}
 .plan ul{list-style:none;display:flex;flex-direction:column;gap:11px}
 .plan li{display:flex;gap:10px;font-size:15.5px;color:#4a525a}
 .plan li::before{content:"✓";color:var(--mint);font-weight:800}
+.price-note{text-align:center;color:var(--mist);font-size:13px;margin-top:26px}
 @media(max-width:640px){.plans{grid-template-columns:1fr}}
 
 /* ============================================================
