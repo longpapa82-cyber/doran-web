@@ -46,6 +46,8 @@ body{
   -webkit-font-smoothing:antialiased;
   /* 은은한 종이 grain(아날로그 무드) */
   background-image:var(--grain,none);
+  /* reveal 초기 transform(좌우 slide)이 가로 스크롤 만들지 않게 */
+  overflow-x:clip;
 }
 a{color:inherit;text-decoration:none}
 .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
@@ -153,6 +155,8 @@ img{max-width:100%;display:block}
   .hero .wrap{grid-template-columns:1fr;text-align:center;padding-top:72px;padding-bottom:72px;min-height:auto}
   .hero .lede{margin-inline:auto}.hero .cta{justify-content:center}
   .hero h1 .accent{white-space:normal}
+  /* 모바일: H1 살짝 줄이고 자간 타이트 → 2줄 안착(3줄 방지) */
+  .hero h1{font-size:clamp(2.4rem,7.2vw,3.4rem);letter-spacing:-1.5px;line-height:1.14}
   .hero-figure{width:min(260px,62vw);margin-top:10px}.spark{display:none}
 }
 
@@ -221,12 +225,18 @@ section.block{padding:120px 0;position:relative}
 .scrolly-step .tag{align-self:flex-start;font-size:12.5px;font-weight:700;color:var(--mint-dark);
   background:var(--mint-tint);padding:5px 12px;border-radius:var(--r-pill);margin-bottom:12px}
 @media(max-width:860px){
-  .scrolly .layout{grid-template-columns:1fr;gap:0}
-  /* 모바일: sticky 해제 → 폰 상단 1회 표시 후 스텝 카드가 세로로 흐름(겹침 방지) */
-  .scrolly-sticky{position:static;height:auto;margin:0 auto 8px;justify-content:flex-start}
-  .phone{width:min(300px,86vw)}
-  .scrolly-steps{gap:16px;padding:8px 0 24px}
-  .scrolly-step{min-height:auto}
+  /* 모바일: grid 대신 flex column → 폰 블록 → 스텝 카드 순서대로 쌓임(겹침 원천 차단) */
+  .scrolly .layout{display:flex;flex-direction:column;gap:0}
+  .scrolly-sticky{position:static;height:auto;margin:0 auto 20px;justify-content:flex-start;width:100%}
+  .phone{width:min(290px,84vw)}
+  /* 폰 대화는 컴팩트하게(전체 높이 축소) */
+  .phone-body{min-height:auto;gap:9px}
+  .bubble{font-size:14px;padding:10px 14px}
+  .scrolly-steps{gap:12px;padding:0 0 4px;width:100%}
+  .scrolly-step{min-height:auto;padding:20px 22px}
+  .scrolly-step .caption{font-size:1.2rem}
+  .scrolly-step .desc{font-size:14.5px;margin-top:7px}
+  .scrolly .wrap[style]{padding-top:48px!important}
 }
 
 /* ============================================================
@@ -337,7 +347,7 @@ section.block{padding:120px 0;position:relative}
 .plan li{display:flex;gap:10px;font-size:15.5px;color:#4a525a}
 .plan li::before{content:"✓";color:var(--mint);font-weight:800}
 .price-note{text-align:center;color:var(--mist);font-size:13px;margin-top:26px}
-@media(max-width:640px){.plans{grid-template-columns:1fr}}
+@media(max-width:860px){.plans{grid-template-columns:1fr;max-width:440px}}
 
 /* ============================================================
    안전 안내
