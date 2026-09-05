@@ -10,6 +10,25 @@
 
 const INK = "#282E38";
 
+/** hex 색을 밝게(t=0..1 흰색 방향). 그라디언트 입체감용. */
+function lightenHex(hex, t) {
+  var n = parseInt(hex.slice(1), 16);
+  var r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+  r = Math.round(r + (255 - r) * t);
+  g = Math.round(g + (255 - g) * t);
+  b = Math.round(b + (255 - b) * t);
+  return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+}
+/** hex 색을 어둡게(t=0..1 검정 방향). */
+function darkenHex(hex, t) {
+  var n = parseInt(hex.slice(1), 16);
+  var r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+  r = Math.round(r * (1 - t));
+  g = Math.round(g * (1 - t));
+  b = Math.round(b * (1 - t));
+  return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+}
+
 /** 연령 축: 실루엣 + 컬러 + 이목구비 비율 (app doraniParts.ts AGES 1:1) */
 const AGES = {
   peer: {
@@ -121,20 +140,38 @@ function doraniSVG(opts = {}) {
   const expression = opts.expression || "smile";
   const a = AGES[age] || AGES.peer;
 
-  const body = `<path d="${a.body}" fill="${a.fill}" stroke="${a.line}" stroke-width="3.5" stroke-linecap="round"/>`;
+  // 몸통 그라디언트(위 밝음→아래 진함, 젤리 입체감) — id 충돌 방지 위해 축 조합으로 유니크.
+  var gid = "dg-" + age + "-" + gender;
+  var lighter = lightenHex(a.fill, 0.22);
+  var darker = darkenHex(a.fill, 0.1);
+  const defs = `<defs>
+    <linearGradient id="${gid}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="${lighter}"/>
+      <stop offset="0.55" stop-color="${a.fill}"/>
+      <stop offset="1" stop-color="${darker}"/>
+    </linearGradient>
+    <radialGradient id="${gid}-hl" cx="0.4" cy="0.28" r="0.5">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>`;
+  const body = `<path d="${a.body}" fill="url(#${gid})" stroke="${a.line}" stroke-width="3.5" stroke-linecap="round"/>`;
+  // 상단 광택 하이라이트(젤리 느낌)
+  const highlight = `<ellipse cx="${100 - (a.eyeXs[1] - a.eyeXs[0]) * 0.18}" cy="${a.eyeY - 34}" rx="42" ry="26" fill="url(#${gid}-hl)"/>`;
   const ant = `<path d="${a.ant}" fill="none" stroke="${a.line}" stroke-width="3.5" stroke-linecap="round"/>`;
   const gm = genderMarkup(gender, a);
   const eyeCenter = a.eyeY; // blink 기준
   const face = `<g class="dorani-face" data-eye="${eyeCenter}">${faceMarkup(expression, a)}</g>`;
   const blush = a.blush
-    .map(([cx, cy, rx, ry]) => `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="#F0A98C" opacity="0.7"/>`)
+    .map(([cx, cy, rx, ry]) => `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="#F0A98C" opacity="0.62"/>`)
     .join("");
 
   const breathClass = opts.breath === false ? "" : " dorani-breath";
   // 안테나(ant)를 몸통(body)보다 먼저 그려, 몸통이 안테나 밑동을 덮게 → 뜬 틈 방지(자연스러운 연결).
   return `<svg class="dorani${breathClass}" viewBox="0 -18 200 208" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="도란이 캐릭터">
+    ${defs}
     <g class="dorani-body">
-      ${ant}${body}${gm}${face}${blush}
+      ${ant}${body}${highlight}${gm}${face}${blush}
     </g>
   </svg>`;
 }
