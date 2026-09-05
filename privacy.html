@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>도란도란 · 개인정보처리방침</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"/>
+<style>
+  :root{--mint:#14BBC2;--ink:#282E38;--muted:#6E7581;--line:#E3E7EC;--bg:#FCFAF1}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Pretendard Variable','Pretendard',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;
+    padding:0 20px 80px}
+  .wrap{max-width:760px;margin:0 auto}
+  header{padding:48px 0 28px;border-bottom:1px solid var(--line);margin-bottom:32px}
+  .brand{font-size:20px;font-weight:800;color:var(--mint)}
+  h1{font-size:30px;margin-top:14px;letter-spacing:-.5px}
+  .date{color:var(--muted);font-size:14px;margin-top:8px}
+  .nav{margin-top:18px;display:flex;gap:14px;font-size:14px}
+  .nav a{color:var(--mint);text-decoration:none;font-weight:600;padding:6px 14px;border:1px solid var(--line);border-radius:999px;background:#fff}
+  .nav a.cur{background:var(--mint);color:#fff;border-color:var(--mint)}
+  h2{font-size:18px;margin:32px 0 10px;padding-top:8px;color:var(--ink)}
+  p{margin:8px 0;color:#3a4046}
+  ul{margin:8px 0 8px 4px;padding-left:20px}
+  li{margin:5px 0;color:#3a4046}
+  footer{margin-top:56px;padding-top:24px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-align:center}
+</style></head>
+<body><div class="wrap">
+  <header>
+    <div class="brand">도란도란</div>
+    <h1>개인정보처리방침</h1>
+    <div class="date">시행일: 2026-09-05</div>
+    <div class="nav">
+      <a href="privacy.html" class="cur">개인정보처리방침</a>
+      <a href="terms.html">이용약관</a>
+    </div>
+  </header>
+  <main><p>도란도란(이하 "본 앱")은 이용자의 개인정보를 중요하게 생각하며, 「개인정보 보호법」 등 관련 법령을 준수합니다. 본 앱은 이용자가 마음속 이야기·고민을 나누는 감성 케어 채팅 서비스로서, 대화 내용이 민감할 수 있음을 인지하고 이를 신중히 보호합니다. 본 방침은 본 앱이 수집·이용하는 개인정보의 항목, 목적, 보관, 제3자 제공 등을 안내합니다.</p><h2>1. 수집하는 개인정보 항목</h2><ul><li>계정 정보: 이메일 주소 (회원가입·로그인 시)</li><li>SNS 로그인(선택): Google/Apple 계정 식별자·이메일 (SNS 인증 로그인 이용 시)</li><li>친구 설정 정보: 이용자가 선택한 AI 친구의 이름·성별·연령대·말투·관심 주제 (온보딩 시)</li><li>대화 내용: 이용자가 입력한 채팅 메시지 및 AI(도란이)의 응답 (서비스 이용 시, 3항 참조)</li><li>서비스 이용기록: 대화 세션 수·사용 시간·모델 사용량 등 (서비스 이용 시)</li><li>오류 로그: 앱 버전·플랫폼(기기 OS)·오류 메시지 (오류 발생 시)</li><li>결제 정보: 구독 상태·상품 식별자 (카드번호 등 결제수단 정보는 수집하지 않음)</li></ul><p>본 앱은 주민등록번호 등 고유식별정보, 카드번호·계좌번호 등 결제수단 상세정보를 수집하지 않습니다. 결제는 Google Play/App Store를 통해 처리되며 결제수단 정보는 각 스토어가 관리합니다.</p><h2>2. 개인정보의 수집·이용 목적</h2><ul><li>회원 식별 및 인증, 서비스 제공(AI 친구 채팅, 대화 이어가기, 구독 관리)</li><li>이용자가 설정한 친구 페르소나에 맞춘 대화 응답 생성</li><li>무료체험·유료 구독 상태 관리 및 부정 이용 방지</li><li>서비스 품질 개선, 오류 진단 및 대응</li><li>이용 문의 응대</li></ul><h2>3. 대화 내용의 처리 (중요)</h2><ul><li>이용자의 채팅 메시지는 오랜 친구 같은 응답을 생성하기 위해 AI 언어 모델 서비스(Google LLC — Gemini API)로 전송됩니다. 응답 생성에 필요한 최근 대화 맥락과 이용자가 설정한 친구 정보가 함께 전송됩니다.</li><li>대화 내용(이용자 메시지 및 AI 응답)은 대화를 이어가기 위해 본 앱의 데이터베이스(Supabase)에 저장되며, 접근 권한 제어(Row Level Security)를 통해 오직 해당 이용자 본인만 접근할 수 있습니다.</li><li>AI 언어 모델 서비스(Google)로의 전송은 서버(Supabase Edge Function)를 통해 이루어지며, AI 서비스 제공사의 데이터 처리 정책에 따라 처리됩니다. 본 앱은 이용자의 대화를 AI 모델 학습 목적으로 제3자에게 제공하지 않습니다.</li><li>이용자는 회원 탈퇴(계정 삭제)를 통해 저장된 대화 내용의 삭제를 요청할 수 있습니다.</li></ul><h2>4. 정신건강·위기 대응 관련 안내 (중요)</h2><ul><li>본 앱은 정서적 지지와 대화를 제공하는 서비스이며, 의료 행위·심리 상담·진단·치료를 제공하지 않습니다. AI(도란이)의 응답은 전문가의 조언을 대체하지 않습니다.</li><li>대화 중 자해·자살 등 위기 신호가 감지되는 경우, 본 앱은 이용자의 안전을 위하여 전문 상담기관 연락처(예: 자살예방 상담전화 109 등) 정보를 안내할 수 있습니다. 이는 정보 제공을 위한 것이며, 본 앱이 위기 상황에 대한 대응·개입을 보장하지 않습니다.</li><li>긴급한 상황에서는 즉시 전문기관 또는 119에 도움을 요청하시기 바랍니다.</li></ul><h2>5. 개인정보의 제3자 제공 및 처리 위탁</h2><p>본 앱은 서비스 제공을 위해 아래 사업자에 개인정보 처리를 위탁합니다.</p><ul><li>Supabase Inc. — 데이터 저장·인증 인프라 (계정 정보, 대화 내용, 이용 기록, 구독 상태)</li><li>Google LLC (Gemini API) — AI 대화 응답 생성 (채팅 메시지·대화 맥락·친구 설정)</li><li>Resend, Inc. — 이메일(인증코드) 발송 대행 (이메일 주소)</li><li>RevenueCat, Inc. — 인앱 구독 상태 관리·검증 (구독 상태, 앱 사용자 식별자)</li><li>Google / Apple — 인앱 결제 처리 (구독 상태, 결제수단 정보는 각 스토어 관리)</li></ul><p>법령에 근거하거나 이용자가 사전에 동의한 경우를 제외하고, 본 앱은 개인정보를 위 목적 외 제3자에게 제공하지 않습니다.</p><h2>6. 개인정보의 국외 이전</h2><p>서비스 제공을 위해 이용자의 개인정보가 아래와 같이 국외로 이전됩니다. 이용자는 서비스 이용 시 본 국외 이전에 동의한 것으로 봅니다.</p><ul><li>이전받는 자: Google LLC (미국) / 이전 항목: 채팅 메시지·대화 맥락·친구 설정 / 이전 목적: AI 대화 응답 생성</li><li>이전받는 자: Supabase Inc. (미국) / 이전 항목: 계정 정보·대화 내용·이용 기록 / 이전 목적: 인증 및 데이터 저장</li><li>이전받는 자: Resend, Inc. (미국) / 이전 항목: 이메일 주소 / 이전 목적: 회원가입 인증코드 발송</li><li>이전받는 자: RevenueCat, Inc. (미국) / 이전 항목: 구독 상태·사용자 식별자 / 이전 목적: 인앱 구독 상태 관리·검증</li><li>이전 시점 및 방법: 서비스 이용 시 정보통신망을 통해 전송됩니다.</li><li>보유·이용 기간: 회원 탈퇴 또는 이용 목적 달성 시까지. 각 수탁자의 개인정보 처리 정책에 따릅니다.</li></ul><h2>7. 개인정보의 보관 및 파기</h2><ul><li>계정 정보, 대화 내용 및 서비스 이용기록은 회원 탈퇴 시 지체 없이 파기합니다.</li><li>다만 관련 법령에 따라 보관 의무가 있는 경우에는 아래 기간 동안 보관 후 파기합니다.</li><li style="list-style:circle;margin-left:16px">계약 또는 청약철회 등에 관한 기록: 5년 (전자상거래 등에서의 소비자보호에 관한 법률)</li><li style="list-style:circle;margin-left:16px">대금결제 및 재화 등의 공급에 관한 기록: 5년 (전자상거래 등에서의 소비자보호에 관한 법률)</li><li style="list-style:circle;margin-left:16px">소비자의 불만 또는 분쟁처리에 관한 기록: 3년 (전자상거래 등에서의 소비자보호에 관한 법률)</li><li>파기 방법: 전자적 파일은 복구·재생이 불가능한 방법으로 영구 삭제하며, 종이 문서는 분쇄 또는 소각합니다.</li></ul><h2>8. 이용자의 권리</h2><p>이용자는 언제든 본인의 개인정보 및 대화 내용의 열람·정정·삭제·처리정지를 요청할 수 있으며, 앱 내 회원 탈퇴(계정 삭제)를 통해 수집된 개인정보 및 대화 내용의 삭제를 요청할 수 있습니다.</p><h2>9. 아동의 개인정보</h2><p>본 앱은 만 14세 미만 아동을 주 대상으로 하지 않으며, 아동의 개인정보를 알면서 수집하지 않습니다.</p><h2>10. 개인정보 보호책임자 및 문의처</h2><p>본 앱은 개인정보 처리에 관한 업무를 총괄하고 이용자의 문의·불만 처리 및 피해 구제를 위하여 아래와 같이 개인정보 보호책임자를 지정하고 있습니다.</p><ul><li>개인정보 보호책임자: 박훈재(대표자)</li><li>연락처: longpapa82@gmail.com</li></ul><p>개인정보 관련 요청·문의는 위 연락처로 접수하며, 접수 후 관련 법령에 따라 지체 없이 처리합니다.</p><h2>11. 방침의 변경</h2><p>본 방침은 법령·서비스 변경에 따라 개정될 수 있으며, 변경 시 앱 내 공지 또는 본 페이지를 통해 안내합니다.</p></main>
+  <footer>도란도란 (DoranDoran) · 문의: longpapa82@gmail.com</footer>
+</div></body></html>
