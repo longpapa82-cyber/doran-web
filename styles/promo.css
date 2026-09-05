@@ -237,6 +237,8 @@ section.block{padding:120px 0;position:relative}
   .scrolly-step .caption{font-size:1.2rem}
   .scrolly-step .desc{font-size:14.5px;margin-top:7px}
   .scrolly .wrap[style]{padding-top:48px!important}
+  /* 모바일: 폰이 정적으로 전체 대화를 보여주므로 "스크롤해서 이어가기" 안내는 무의미 → 숨김 */
+  .progress-hint{display:none}
 }
 
 /* ============================================================
