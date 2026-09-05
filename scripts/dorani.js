@@ -63,9 +63,12 @@ function faceMarkup(exp, a) {
   if (exp === "cheer") {
     s += `<path d="M${lx - r - 2} ${y + 2} Q${lx} ${y - r - 3} ${lx + r + 2} ${y + 2} M${rx - r - 2} ${y + 2} Q${rx} ${y - r - 3} ${rx + r + 2} ${y + 2}" fill="none" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>`;
   } else {
+    // 눈 그룹을 .dorani-eye 로 감싸 lookAt(눈동자 커서 추적) 시 transform 적용.
     for (const x of [lx, rx]) {
+      s += `<g class="dorani-eye">`;
       s += `<circle cx="${x}" cy="${y + eyeDy}" r="${r}" fill="${INK}"/>`;
       s += `<circle cx="${x + 2.5}" cy="${y + eyeDy - 2.5}" r="${a.hiR}" fill="#ffffff"/>`;
+      s += `</g>`;
     }
   }
 
@@ -194,8 +197,42 @@ function mountDorani(host, opts) {
   host.appendChild(document.importNode(svg, true));
 }
 
+/**
+ * 눈동자가 커서(또는 임의 좌표)를 향하게 한다(웹 전용 매력).
+ * host 내부 .dorani-eye 그룹에 최대 ±maxPx 범위로 translate 를 건다.
+ * @param {HTMLElement} host  도란이 컨테이너
+ * @param {number} nx  정규화 x(-1..1) — host 중심 기준
+ * @param {number} ny  정규화 y(-1..1)
+ * @param {number} [maxPx=3]  최대 이동(SVG 좌표계)
+ */
+function doraniLookAt(host, nx, ny, maxPx) {
+  var max = maxPx == null ? 3 : maxPx;
+  var eyes = host.querySelectorAll(".dorani-eye");
+  var dx = Math.max(-1, Math.min(1, nx)) * max;
+  var dy = Math.max(-1, Math.min(1, ny)) * max;
+  for (var i = 0; i < eyes.length; i++) {
+    eyes[i].style.transform = "translate(" + dx + "px," + dy + "px)";
+    eyes[i].style.transition = "transform .18s cubic-bezier(.16,1,.3,1)";
+  }
+}
+
+/**
+ * 변신·클릭 시 살짝 튀는 pulse(scale). 도란이 body 그룹에 CSS 클래스로 트리거.
+ * @param {HTMLElement} host
+ */
+function doraniPulse(host) {
+  var body = host.querySelector(".dorani-body");
+  if (!body) return;
+  body.classList.remove("pulse");
+  // reflow 로 애니메이션 재시작
+  void body.offsetWidth;
+  body.classList.add("pulse");
+}
+
 // 전역 노출(모듈 번들 없이 정적 스크립트로 사용)
 window.doraniSVG = doraniSVG;
 window.setDoraniExpression = setDoraniExpression;
 window.doraniDefaultName = doraniDefaultName;
 window.mountDorani = mountDorani;
+window.doraniLookAt = doraniLookAt;
+window.doraniPulse = doraniPulse;

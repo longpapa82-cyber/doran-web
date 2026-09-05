@@ -99,39 +99,68 @@
   function initFriendMaker() {
     var stage = document.getElementById("maker-dorani");
     if (!stage || !window.mountDorani) return;
-    var state = { gender: "neutral", age: "peer", exp: "smile" };
+    var state = { gender: "neutral", age: "peer", tone: "casual", exp: "smile" };
     var nameEl = document.querySelector(".friend-name");
     var greetEl = document.querySelector(".friend-greet");
 
+    // 인사말: 연령 × 말투(반말/존댓말) 조합
     var GREET = {
-      peer: "안녕! 나랑 편하게 얘기하자 :)",
-      elder: "왔어? 오늘 하루 어땠는지 얘기해줘.",
-      younger: "안뇽! 나한테 다 말해도 돼!",
+      casual: {
+        peer: "안녕! 나랑 편하게 얘기하자 :)",
+        elder: "왔어? 오늘 하루 어땠는지 얘기해줘.",
+        younger: "안뇽! 나한테 다 말해도 돼!",
+      },
+      polite: {
+        peer: "안녕하세요! 편하게 이야기 나눠요.",
+        elder: "오셨어요? 오늘 하루 어떠셨는지 들려주세요.",
+        younger: "안녕하세요! 무슨 얘기든 다 들어드릴게요.",
+      },
     };
 
-    function render() {
+    function greetText() {
+      return (GREET[state.tone] || GREET.casual)[state.age] || GREET.casual.peer;
+    }
+    function mount() {
       window.mountDorani(stage, { age: state.age, gender: state.gender, expression: state.exp });
+    }
+    function updateText() {
       if (nameEl && window.doraniDefaultName) nameEl.textContent = window.doraniDefaultName(state.age, state.gender);
-      if (greetEl) greetEl.textContent = GREET[state.age] || GREET.peer;
+      if (greetEl) {
+        if (window.effects && window.effects.typeText) window.effects.typeText(greetEl, greetText(), 36);
+        else greetEl.textContent = greetText();
+      }
     }
 
     document.querySelectorAll("[data-maker]").forEach(function (btn) {
       btn.addEventListener("click", function () {
-        var key = btn.getAttribute("data-maker"); // gender | age
-        var val = btn.getAttribute("data-val");
-        state[key] = val;
-        // 같은 그룹 chip on 갱신
+        var key = btn.getAttribute("data-maker"); // gender | age | tone
+        state[key] = btn.getAttribute("data-val");
         var group = btn.parentElement;
         group.querySelectorAll(".chip").forEach(function (c) { c.classList.remove("on"); });
         btn.classList.add("on");
-        // 변신 시 잠깐 cheer 로 반응 후 smile 복귀(모션 허용 시)
-        if (!reduce) {
-          state.exp = "cheer"; render();
-          setTimeout(function () { state.exp = "smile"; render(); }, 520);
-        } else { state.exp = "smile"; render(); }
+
+        if (key === "tone") {
+          // 말투만 바꾸면 캐릭터는 그대로, 인사말만 타이핑 갱신
+          updateText();
+          return;
+        }
+        // gender/age 변경 → 재마운트 + 튀는 pulse + cheer→smile
+        state.exp = "smile";
+        mount();
+        updateText();
+        if (!reduce && window.doraniPulse) {
+          window.doraniPulse(stage);
+          if (window.setDoraniExpression) {
+            window.setDoraniExpression(stage, "cheer", { age: state.age });
+            setTimeout(function () { window.setDoraniExpression(stage, "smile", { age: state.age }); }, 560);
+          }
+        }
       });
     });
-    render();
+
+    mount();
+    if (nameEl && window.doraniDefaultName) nameEl.textContent = window.doraniDefaultName(state.age, state.gender);
+    if (greetEl) greetEl.textContent = greetText(); // 초기엔 타이핑 없이 즉시
   }
 
   /* ── 늦은 밤 별 ── */
