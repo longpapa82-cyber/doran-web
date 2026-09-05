@@ -305,8 +305,8 @@ section.block{padding:120px 0;position:relative}
    요금
    ============================================================ */
 /* 요금은 카드가 짧아 하단 여백 축소, 안전안내와 자연스럽게 이어지게 */
-#plans{padding-bottom:64px}
-.safety-band{padding-top:40px;padding-bottom:96px}
+#plans{padding-bottom:40px}
+.safety-band{padding-top:20px;padding-bottom:64px}
 .plans{margin-top:52px;display:grid;grid-template-columns:repeat(2,1fr);gap:24px;max-width:760px;margin-inline:auto}
 .plan{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);padding:34px 30px;position:relative}
 .plan.pro{border:2px solid var(--mint);box-shadow:0 14px 40px rgba(20,187,194,.16);animation:proGlow 3.4s ease-in-out infinite}
