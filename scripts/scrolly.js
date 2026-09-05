@@ -65,6 +65,7 @@
     }
     var steps = Array.prototype.slice.call(document.querySelectorAll(".scrolly-step"));
     var bubbles = Array.prototype.slice.call(document.querySelectorAll(".phone-body .bubble"));
+    var typing = document.getElementById("chat-typing");
     if (!steps.length) return;
 
     // reduced-motion: 전부 노출 + 마지막 표정
@@ -74,18 +75,39 @@
       return;
     }
 
+    var lastIdx = -1;
+    var typeTimer = null;
+    function showUpTo(idx) {
+      bubbles.forEach(function (b, i) { b.classList.toggle("show", i <= idx); });
+    }
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (!e.isIntersecting) return;
         var idx = parseInt(e.target.getAttribute("data-step"), 10);
         var exp = e.target.getAttribute("data-exp") || "listen";
-        // 누적 노출: 이 스텝까지의 말풍선 show
-        bubbles.forEach(function (b, i) {
-          b.classList.toggle("show", i <= idx);
-        });
-        // 활성 카드 강조
         steps.forEach(function (st) { st.classList.toggle("active", st === e.target); });
-        if (avatar) setExp(avatar, exp);
+
+        var forward = idx > lastIdx;
+        var isAiBubble = bubbles[idx] && bubbles[idx].classList.contains("ai");
+        if (typeTimer) { clearTimeout(typeTimer); typeTimer = null; }
+        if (typing) typing.classList.remove("show");
+
+        if (forward && isAiBubble && typing) {
+          // 도란이 답 직전: 이전 말풍선까지 노출 + 타이핑 인디케이터 → 잠깐 후 말풍선 pop
+          showUpTo(idx - 1);
+          typing.classList.add("show");
+          if (avatar) setExp(avatar, "think");
+          typeTimer = setTimeout(function () {
+            typing.classList.remove("show");
+            showUpTo(idx);
+            if (avatar) setExp(avatar, exp);
+            typeTimer = null;
+          }, 640);
+        } else {
+          showUpTo(idx);
+          if (avatar) setExp(avatar, exp);
+        }
+        lastIdx = idx;
       });
     }, { threshold: 0.55, rootMargin: "-20% 0px -20% 0px" });
     steps.forEach(function (st) { io.observe(st); });
@@ -163,7 +185,7 @@
     if (greetEl) greetEl.textContent = greetText(); // 초기엔 타이핑 없이 즉시
   }
 
-  /* ── 늦은 밤 별 ── */
+  /* ── 늦은 밤 별 + 유성 ── */
   function initStars() {
     var box = document.querySelector(".night .stars");
     if (!box || reduce) return;
@@ -181,5 +203,30 @@
       frag.appendChild(s);
     }
     box.appendChild(frag);
+
+    // 유성: 섹션이 보일 때만 주기적으로 스윽. Math.random 회피 → 카운터 기반 위치 변주.
+    var meteor = document.createElement("span");
+    meteor.className = "meteor";
+    box.appendChild(meteor);
+    var visible = false, count = 0, timer = null;
+    function shoot() {
+      if (!visible) return;
+      count++;
+      meteor.style.left = (30 + (count * 23) % 55) + "%";
+      meteor.style.top = (5 + (count * 17) % 30) + "%";
+      meteor.classList.remove("shoot");
+      void meteor.offsetWidth;
+      meteor.classList.add("shoot");
+    }
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          visible = e.isIntersecting;
+          if (visible && !timer) { timer = setInterval(shoot, 4200); setTimeout(shoot, 800); }
+          else if (!visible && timer) { clearInterval(timer); timer = null; }
+        });
+      }, { threshold: 0.2 });
+      io.observe(document.querySelector(".night"));
+    }
   }
 })();
