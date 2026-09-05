@@ -75,6 +75,22 @@
       return;
     }
 
+    // 모바일(sticky 해제): 폰 말풍선은 전부 노출(정적 완결), 스텝 카드 진입 시 표정만 반응.
+    // 폰이 스크롤로 사라지므로 누적 연출 대신 완결된 대화를 상단에 보여주는 게 안정적.
+    var isMobile = window.matchMedia("(max-width: 860px)").matches;
+    if (isMobile) {
+      bubbles.forEach(function (b) { b.classList.add("show"); });
+      if (avatar) setExp(avatar, "smile");
+      var moIo = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          steps.forEach(function (st) { st.classList.toggle("active", st === e.target); });
+        });
+      }, { threshold: 0.5, rootMargin: "-15% 0px -25% 0px" });
+      steps.forEach(function (st) { moIo.observe(st); });
+      return;
+    }
+
     var lastIdx = -1;
     var typeTimer = null;
     function showUpTo(idx) {

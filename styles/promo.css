@@ -72,16 +72,21 @@ img{max-width:100%;display:block}
   background:linear-gradient(90deg,var(--mint),var(--mint-dark));
   transform:scaleX(0);transform-origin:left;will-change:transform}
 
-/* ── reveal on scroll (다양화) ── */
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
-.reveal.in{opacity:1;transform:none}
-.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
+/* ── reveal on scroll (강화·다양화) ── */
+.reveal{opacity:0;transform:translateY(34px);filter:blur(4px);
+  transition:opacity .75s var(--ease),transform .8s cubic-bezier(.16,1,.3,1),filter .6s ease}
+.reveal.in{opacity:1;transform:none;filter:none}
+.reveal.d1{transition-delay:.09s}.reveal.d2{transition-delay:.19s}.reveal.d3{transition-delay:.29s}
+.reveal.d4{transition-delay:.39s}
 /* 변형: scale-in / 좌우 slide */
-.reveal.rv-scale{transform:scale(.92)}
+.reveal.rv-scale{transform:scale(.88) translateY(20px)}
 .reveal.rv-scale.in{transform:none}
-.reveal.rv-left{transform:translateX(-32px)}
-.reveal.rv-right{transform:translateX(32px)}
+.reveal.rv-left{transform:translateX(-44px)}
+.reveal.rv-right{transform:translateX(44px)}
 .reveal.rv-left.in,.reveal.rv-right.in{transform:none}
+/* 팝(제목 강조): 살짝 튀며 등장 */
+.reveal.rv-pop{transform:scale(.82);transition:opacity .6s ease,transform .7s cubic-bezier(.34,1.56,.64,1),filter .5s ease}
+.reveal.rv-pop.in{transform:none}
 
 /* ============================================================
    NAV
@@ -217,8 +222,11 @@ section.block{padding:120px 0;position:relative}
   background:var(--mint-tint);padding:5px 12px;border-radius:var(--r-pill);margin-bottom:12px}
 @media(max-width:860px){
   .scrolly .layout{grid-template-columns:1fr;gap:0}
-  .scrolly-sticky{top:76px;margin-bottom:24px}
-  .scrolly-steps{gap:10vh;padding:4vh 0 10vh}
+  /* 모바일: sticky 해제 → 폰 상단 1회 표시 후 스텝 카드가 세로로 흐름(겹침 방지) */
+  .scrolly-sticky{position:static;height:auto;margin:0 auto 8px;justify-content:flex-start}
+  .phone{width:min(300px,86vw)}
+  .scrolly-steps{gap:16px;padding:8px 0 24px}
+  .scrolly-step{min-height:auto}
 }
 
 /* ============================================================
