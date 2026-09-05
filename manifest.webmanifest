@@ -1,0 +1,31 @@
+{
+  "name": "도란도란 · 오랜 친구처럼",
+  "short_name": "도란도란",
+  "description": "오랜 친구처럼 나의 고민과 비밀을 들어주고 위로해주는 AI 친구 채팅",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#FCFAF1",
+  "theme_color": "#14BBC2",
+  "lang": "ko",
+  "icons": [
+    {
+      "src": "assets/icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icon.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
