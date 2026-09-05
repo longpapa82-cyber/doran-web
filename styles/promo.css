@@ -98,7 +98,10 @@ img{max-width:100%;display:block}
 .nav.scrolled{background:rgba(252,250,241,.9);box-shadow:0 1px 0 var(--line)}
 .nav .row{display:flex;align-items:center;justify-content:space-between;height:66px}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px}
-.brand .mark{width:36px;height:36px;border-radius:11px}
+.brand .mark{width:38px;height:38px;border-radius:12px;
+  box-shadow:0 4px 12px rgba(63,166,174,.28);border:1.5px solid rgba(255,255,255,.9);
+  transition:transform .3s var(--ease),box-shadow .3s}
+.brand:hover .mark{transform:rotate(-6deg) scale(1.06);box-shadow:0 6px 18px rgba(63,166,174,.4)}
 .brand b{color:var(--mint-dark)}
 .nav nav{display:flex;gap:26px;font-size:15px;font-weight:600;color:var(--slate)}
 .nav nav a{position:relative;padding:4px 0;transition:color .2s}
@@ -119,7 +122,7 @@ img{max-width:100%;display:block}
   background:radial-gradient(130% 100% at 12% -10%,#BDEEE7,#A8EEE4 30%,#CBF1EA 52%,#FCE3D2 100%);
   background-size:130% 130%;animation:heroDrift 24s ease-in-out infinite alternate}
 @keyframes heroDrift{0%{background-position:0% 0%}100%{background-position:100% 60%}}
-.hero .wrap{display:grid;grid-template-columns:1.5fr .78fr;gap:36px;align-items:center;padding:112px 22px 124px;min-height:min(86vh,760px)}
+.hero .wrap{display:grid;grid-template-columns:1.35fr .95fr;gap:24px;align-items:center;padding:112px 22px 124px;min-height:min(86vh,760px)}
 .hero .spark{position:absolute;color:#fff;filter:drop-shadow(0 2px 6px rgba(0,0,0,.06));animation:float 6s ease-in-out infinite}
 .spark.s1{top:70px;left:44%;font-size:24px}.spark.s2{top:170px;left:26%;font-size:16px;animation-delay:1.2s}
 .spark.s3{bottom:120px;right:10%;font-size:20px;animation-delay:.6s}.spark.s4{top:240px;right:22%;font-size:14px;animation-delay:2s}
@@ -147,8 +150,8 @@ img{max-width:100%;display:block}
 /* 틸트 카드 복귀 */
 [data-tilt]{transition:transform .4s var(--ease),box-shadow .25s;transform-style:preserve-3d}
 
-.hero-figure{position:relative;justify-self:center;width:min(420px,82%);display:grid;place-items:center;isolation:isolate}
-.hero-dorani{width:82%;position:relative;z-index:2;
+.hero-figure{position:relative;justify-self:center;width:min(500px,94%);display:grid;place-items:center;isolation:isolate}
+.hero-dorani{width:96%;position:relative;z-index:2;
   filter:drop-shadow(0 20px 36px rgba(63,166,174,.32));
   animation:doraniFloat 5.5s ease-in-out infinite}
 @keyframes doraniFloat{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-14px) rotate(1.5deg)}}
@@ -296,14 +299,15 @@ section.block{padding:120px 0;position:relative}
   background:var(--surface);border:1px solid var(--line);border-radius:28px;padding:40px;box-shadow:var(--shadow-card)}
 .maker-preview{text-align:center}
 /* 친구 만들기 도란이 — 히어로처럼 후광·링·부유·그림자로 생동감 */
-.stage-wrap{position:relative;width:210px;height:210px;margin:0 auto 16px;display:grid;place-items:center;isolation:isolate}
+.stage-wrap{position:relative;width:230px;height:230px;margin:0 auto 16px;display:grid;place-items:center;isolation:isolate}
 .maker-preview .stage{width:82%;position:relative;z-index:2;
   filter:drop-shadow(0 14px 26px rgba(63,166,174,.28));animation:doraniFloat 5s ease-in-out infinite}
+/* 흰 카드 배경 대비: 후광은 민트틴트, 링은 진하게 */
 .stage-halo{position:absolute;width:100%;aspect-ratio:1;border-radius:50%;z-index:0;
-  background:radial-gradient(circle at 50% 45%,rgba(255,255,255,.95),rgba(202,241,242,.6) 42%,transparent 68%);
+  background:radial-gradient(circle at 50% 45%,rgba(202,241,242,.85),rgba(202,241,242,.4) 45%,transparent 70%);
   animation:haloPulse 4s ease-in-out infinite}
 .stage-ring{position:absolute;width:98%;aspect-ratio:1;border-radius:50%;z-index:0;
-  border:2px dashed rgba(20,187,194,.26);animation:ringSpin 22s linear infinite}
+  border:2px dashed rgba(20,187,194,.42);animation:ringSpin 22s linear infinite}
 .stage-shadow{position:absolute;bottom:2%;width:44%;height:16px;border-radius:50%;z-index:1;
   background:radial-gradient(ellipse,rgba(63,166,174,.26),transparent 70%);filter:blur(3px);
   animation:shadowPulse 5s ease-in-out infinite}
@@ -442,7 +446,10 @@ section.block{padding:120px 0;position:relative}
 footer.ft{padding:56px 0 64px;border-top:1px solid var(--line)}
 .ft .frow{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
 .ft .flogo{display:flex;align-items:center;gap:10px;font-weight:800}
-.ft .flogo .mark{width:32px;height:32px;border-radius:10px}
+.ft .flogo .mark{width:34px;height:34px;border-radius:11px;
+  box-shadow:0 3px 10px rgba(63,166,174,.24);border:1.5px solid rgba(255,255,255,.9);
+  transition:transform .3s var(--ease)}
+.ft .flogo:hover .mark{transform:rotate(-6deg) scale(1.06)}
 .ft .flinks{display:flex;gap:22px;font-size:14.5px;font-weight:600;color:var(--slate);flex-wrap:wrap}
 .ft .flinks a:hover{color:var(--mint-dark)}
 .ft .copy{color:var(--slate);font-size:13px;margin-top:22px}
