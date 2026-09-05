@@ -82,9 +82,9 @@
   function initHeroParallax() {
     var hero = document.querySelector(".hero");
     if (!hero) return;
+    // .hero-figure(컨테이너)만 parallax → 내부 요소(dorani/blob/halo)는 CSS 애니메이션 유지(충돌 방지)
     var layers = [
-      { el: document.querySelector(".hero-figure"), depth: 14 },
-      { el: document.querySelector(".hero-blob"), depth: 26 },
+      { el: document.querySelector(".hero-figure"), depth: 16 },
     ].filter(function (l) { return l.el; });
     var sparks = Array.prototype.slice.call(hero.querySelectorAll(".spark"));
     var doraniHost = document.getElementById("hero-dorani");
