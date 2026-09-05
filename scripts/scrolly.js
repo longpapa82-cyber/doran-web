@@ -83,9 +83,11 @@
         bubbles.forEach(function (b, i) {
           b.classList.toggle("show", i <= idx);
         });
+        // 활성 카드 강조
+        steps.forEach(function (st) { st.classList.toggle("active", st === e.target); });
         if (avatar) setExp(avatar, exp);
       });
-    }, { threshold: 0.6 });
+    }, { threshold: 0.55, rootMargin: "-20% 0px -20% 0px" });
     steps.forEach(function (st) { io.observe(st); });
   }
 
