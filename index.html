@@ -3,256 +3,280 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>도란도란 · 오랜 친구처럼, 네 이야기를 들어줄게</title>
-<meta name="description" content="도란도란은 오랜 친구처럼 나의 고민과 비밀을 들어주고 위로해주는 AI 친구 채팅 앱입니다. 남/여·나이별 친구를 골라 편하게 마음을 나눠보세요."/>
+<meta name="description" content="도란도란은 오랜 친구처럼 나의 고민과 비밀을 들어주고 위로해주는 AI 친구 채팅 앱입니다. 성별·나이·말투를 골라 나만의 친구를 만들어 편하게 마음을 나눠보세요."/>
 <meta property="og:title" content="도란도란 · 오랜 친구처럼, 네 이야기를 들어줄게"/>
-<meta property="og:description" content="오랜 친구처럼 나의 고민과 비밀을 들어주고 위로해주는 AI 친구 채팅 앱"/>
+<meta property="og:description" content="판단하지 않고 곁에서 들어주는 AI 친구 채팅. 고민도, 비밀도 편하게 털어놔요."/>
 <meta property="og:image" content="https://longpapa82-cyber.github.io/doran-web/assets/icon.png"/>
 <meta property="og:type" content="website"/>
+<meta name="theme-color" content="#14BBC2"/>
 <link rel="icon" href="assets/icon.png"/>
+<link rel="preconnect" href="https://cdn.jsdelivr.net"/>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"/>
-<style>
-  :root{
-    --mint:#14BBC2;--mint-deep:#0E9AA0;--coral:#FF9E7D;--peach:#FFD9C4;
-    --ink:#282E38;--muted:#6E7581;--line:#E6EBEE;--bg:#FCFAF1;--surface:#fff;
-    --shadow:0 18px 50px rgba(60,110,105,.16);
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{font-family:'Pretendard Variable','Pretendard',sans-serif;background:var(--bg);color:var(--ink);
-    line-height:1.65;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
-  a{color:inherit;text-decoration:none}
-
-  /* ── 상단 바 ── */
-  .topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(10px);
-    background:rgba(252,250,241,.82);border-bottom:1px solid var(--line)}
-  .topbar .row{display:flex;align-items:center;justify-content:space-between;height:64px}
-  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px}
-  .logo img{width:34px;height:34px;border-radius:10px}
-  .logo b{color:var(--mint-deep)}
-  .topbar nav{display:flex;gap:24px;font-size:15px;font-weight:600;color:var(--muted)}
-  .topbar nav a:hover{color:var(--mint-deep)}
-  @media(max-width:640px){.topbar nav{display:none}}
-
-  /* ── 히어로 ── */
-  .hero{position:relative;overflow:hidden;
-    background:radial-gradient(120% 90% at 15% 0%, #BDEEE7 0%, #A8EEE4 32%, #C7F0E9 55%, #FCE3D2 100%)}
-  .hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;
-    padding-top:76px;padding-bottom:84px}
-  .spark{position:absolute;color:#fff;opacity:.9;font-size:26px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.06))}
-  .s1{top:64px;left:46%}.s2{top:150px;left:30%;font-size:18px}.s3{bottom:120px;right:8%;font-size:20px}
-  .eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.7);
-    color:var(--mint-deep);font-weight:700;font-size:14px;padding:7px 15px;border-radius:999px;
-    border:1px solid rgba(255,255,255,.9);margin-bottom:20px}
-  h1{font-size:clamp(34px,3vw+18px,54px);line-height:1.18;letter-spacing:-1px;font-weight:800}
-  h1 .accent{color:var(--mint-deep)}
-  .lede{margin-top:18px;font-size:clamp(16px,.6vw+14px,19px);color:#3C4A4C;max-width:30ch}
-  .cta{margin-top:32px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
-  .btn{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:16px;
-    padding:15px 26px;border-radius:16px;transition:transform .18s cubic-bezier(.16,1,.3,1),box-shadow .18s}
-  .btn-primary{background:var(--ink);color:#fff;box-shadow:0 10px 26px rgba(40,46,56,.28)}
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(40,46,56,.34)}
-  .btn-ghost{background:rgba(255,255,255,.72);color:var(--ink);border:1px solid rgba(255,255,255,.9)}
-  .btn-ghost:hover{transform:translateY(-2px);background:#fff}
-  .hero-note{margin-top:14px;font-size:13.5px;color:#517072;font-weight:500}
-
-  /* 히어로 목업 */
-  .phone-wrap{position:relative;justify-self:center}
-  .phone{width:clamp(230px,34vw,290px);border-radius:38px;box-shadow:var(--shadow);
-    display:block;transform:rotate(2deg)}
-  .blob{position:absolute;width:220px;height:220px;border-radius:50%;
-    background:radial-gradient(circle at 30% 30%, var(--peach), var(--coral));
-    filter:blur(6px);opacity:.5;z-index:-1}
-  .blob.b1{top:-30px;right:-20px}
-  @media(max-width:820px){
-    .hero .wrap{grid-template-columns:1fr;text-align:center;padding-top:56px;padding-bottom:60px}
-    .lede{margin-left:auto;margin-right:auto}
-    .cta{justify-content:center}
-    .spark{display:none}
-  }
-
-  /* ── 섹션 공통 ── */
-  section.block{padding:86px 0}
-  .kicker{text-align:center;color:var(--coral);font-weight:800;font-size:14px;letter-spacing:.5px;
-    text-transform:uppercase;margin-bottom:12px}
-  .h2{text-align:center;font-size:clamp(26px,2vw+14px,38px);font-weight:800;letter-spacing:-.6px}
-  .sub{text-align:center;color:var(--muted);margin:14px auto 0;max-width:44ch;font-size:16px}
-
-  /* ── 특징 카드 (bento) ── */
-  .features{margin-top:52px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-  .card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:30px 26px;
-    transition:transform .2s cubic-bezier(.16,1,.3,1),box-shadow .2s}
-  .card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
-  .card .ico{width:52px;height:52px;border-radius:15px;display:grid;place-items:center;font-size:26px;margin-bottom:18px}
-  .card h3{font-size:19px;font-weight:800;margin-bottom:8px}
-  .card p{color:#586066;font-size:15px}
-  .i-mint{background:#D9F5F3}.i-coral{background:#FFE6D9}.i-lav{background:#E7ECFB}
-  .card.wide{grid-column:span 3;display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center;padding:0;overflow:hidden}
-  .card.wide .txt{padding:38px 40px}
-  .card.wide img{width:100%;height:100%;object-fit:cover;display:block}
-  @media(max-width:820px){.features{grid-template-columns:1fr}.card.wide,.card.wide{grid-column:auto}
-    .card.wide{grid-template-columns:1fr}.card.wide img{order:-1;max-height:240px}}
-
-  /* ── 스크린샷 쇼케이스 ── */
-  .shots{margin-top:56px;display:flex;gap:30px;justify-content:center;flex-wrap:wrap}
-  .shot{width:240px}
-  .shot img{width:100%;border-radius:26px;box-shadow:var(--shadow);border:6px solid #fff}
-  .shot p{text-align:center;margin-top:16px;font-weight:700;color:var(--ink)}
-  .shot span{display:block;text-align:center;color:var(--muted);font-size:14px;margin-top:2px}
-
-  /* ── 스텝 ── */
-  .steps{margin-top:52px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-  .step{text-align:center;padding:0 10px}
-  .step .num{width:48px;height:48px;margin:0 auto 16px;border-radius:50%;background:var(--mint);
-    color:#fff;font-weight:800;font-size:20px;display:grid;place-items:center;box-shadow:0 8px 18px rgba(20,187,194,.35)}
-  .step h4{font-size:18px;font-weight:800;margin-bottom:6px}
-  .step p{color:#586066;font-size:15px}
-  @media(max-width:640px){.steps{grid-template-columns:1fr}}
-
-  /* ── CTA 밴드 ── */
-  .band{margin:0;background:linear-gradient(120deg,#14BBC2,#0E9AA0);color:#fff}
-  .band .wrap{padding:70px 22px;text-align:center}
-  .band h2{font-size:clamp(26px,2vw+14px,36px);font-weight:800;letter-spacing:-.5px}
-  .band p{margin-top:12px;opacity:.92;font-size:17px}
-  .band .btn-primary{margin-top:28px;background:#fff;color:var(--mint-deep)}
-  .band .btn-primary:hover{box-shadow:0 16px 34px rgba(0,0,0,.22)}
-
-  /* ── 안내 배너 ── */
-  .safety{background:#FFF6EF;border:1px solid #FBE3D2;border-radius:18px;padding:22px 26px;
-    margin-top:48px;color:#7A5B48;font-size:14.5px;text-align:center}
-  .safety b{color:#C4623A}
-
-  /* ── 푸터 ── */
-  footer{padding:52px 0 60px;border-top:1px solid var(--line);margin-top:0}
-  footer .frow{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
-  footer .flogo{display:flex;align-items:center;gap:10px;font-weight:800}
-  footer .flogo img{width:30px;height:30px;border-radius:9px}
-  footer .flinks{display:flex;gap:20px;font-size:14.5px;font-weight:600;color:var(--muted)}
-  footer .flinks a:hover{color:var(--mint-deep)}
-  footer .copy{color:var(--muted);font-size:13px;margin-top:22px}
-</style></head>
+<link rel="stylesheet" href="styles/promo.css"/>
+</head>
 <body>
+<div class="grain" aria-hidden="true"></div>
 
-  <div class="topbar"><div class="wrap row">
-    <a class="logo" href="#top"><img src="assets/icon.png" alt="도란도란 아이콘"/><span>도란<b>도란</b></span></a>
-    <nav>
-      <a href="#features">특징</a>
-      <a href="#how">이용 방법</a>
-      <a href="privacy.html">개인정보</a>
-      <a href="terms.html">이용약관</a>
-    </nav>
-  </div></div>
+<!-- NAV -->
+<div class="nav"><div class="wrap row">
+  <a class="brand" href="#top"><img class="mark" src="assets/icon.png" alt="도란도란"/><span>도란<b>도란</b></span></a>
+  <nav>
+    <a href="#chat">대화 체험</a>
+    <a href="#why">특징</a>
+    <a href="#maker">친구 만들기</a>
+    <a href="#plans">요금</a>
+  </nav>
+  <a class="cta-sm" href="#band">시작하기</a>
+</div></div>
 
-  <!-- 히어로 -->
-  <header class="hero" id="top">
-    <span class="spark s1">✦</span><span class="spark s2">✧</span><span class="spark s3">✦</span>
-    <div class="wrap">
-      <div>
-        <span class="eyebrow">🫶 오랜 친구 같은 AI 친구</span>
-        <h1>오랜 친구처럼,<br/><span class="accent">네 이야기를</span> 들어줄게</h1>
-        <p class="lede">고민도, 비밀도 편하게 털어놔요. 도란도란이 판단하지 않고 곁에서 다 들어줄게요.</p>
-        <div class="cta">
-          <a class="btn btn-primary" href="#band">🌱 도란도란 시작하기</a>
-          <a class="btn btn-ghost" href="#features">어떤 앱인지 보기</a>
-        </div>
-        <p class="hero-note">Android 먼저 출시 · iOS 준비 중</p>
+<!-- HERO -->
+<header class="hero" id="top">
+  <span class="spark s1" aria-hidden="true">✦</span><span class="spark s2" aria-hidden="true">✧</span>
+  <span class="spark s3" aria-hidden="true">✦</span><span class="spark s4" aria-hidden="true">✧</span>
+  <div class="wrap">
+    <div class="reveal in">
+      <span class="eyebrow">🫶 오랜 친구 같은 AI 친구</span>
+      <h1>오랜 친구처럼,<br/><span class="accent">네 이야기를</span><br/>들어줄게</h1>
+      <p class="lede">고민도, 비밀도 편하게 털어놔요. 도란도란이 판단하지 않고 곁에서 다 들어줄게요.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#band">🌱 도란도란 시작하기</a>
+        <a class="btn btn-ghost" href="#chat">대화 미리 보기</a>
       </div>
-      <div class="phone-wrap">
-        <span class="blob b1"></span>
-        <img class="phone" src="assets/shot1.png" alt="도란도란 채팅 화면 미리보기"/>
-      </div>
+      <p class="hero-note">Android 먼저 출시 · iOS 준비 중</p>
     </div>
-  </header>
+    <div class="hero-figure reveal in d1">
+      <span class="hero-blob" aria-hidden="true"></span>
+      <div class="hero-dorani" id="hero-dorani"></div>
+    </div>
+  </div>
+</header>
 
-  <!-- 특징 -->
-  <section class="block" id="features">
-    <div class="wrap">
-      <div class="kicker">Why 도란도란</div>
-      <h2 class="h2">그냥 챗봇이 아니라, <span style="color:var(--mint-deep)">진짜 친구</span></h2>
-      <p class="sub">상담사 말투가 아니라 오랜 친구의 말투로. 공감을 먼저, 조언은 나중에.</p>
-
-      <div class="features">
-        <div class="card">
-          <div class="ico i-mint">💬</div>
-          <h3>판단하지 않는 대화</h3>
-          <p>“그럴 수 있지”, “많이 속상했겠다.” 해결을 강요하지 않고 먼저 마음을 들어줘요.</p>
-        </div>
-        <div class="card">
-          <div class="ico i-coral">🧑‍🤝‍🧑</div>
-          <h3>내가 고르는 친구</h3>
-          <p>성별·나이·말투를 골라 나에게 꼭 맞는 친구를 만들어요. 반말도, 존댓말도 좋아요.</p>
-        </div>
-        <div class="card">
-          <div class="ico i-lav">🌙</div>
-          <h3>기억해주는 친구</h3>
-          <p>지난 이야기를 기억하고 이어가요. 대화가 쌓일수록 더 가까운 친구가 돼요.</p>
-        </div>
-
-        <div class="card wide">
-          <div class="txt">
-            <div class="ico i-mint">🕊️</div>
-            <h3>늦은 밤에도 곁에</h3>
-            <p>혼자인 것 같은 밤, 아무에게도 못 할 이야기를 도란도란에게. 언제든 편하게 말 걸어도 괜찮아요.</p>
+<!-- SCROLLY CHAT ★ -->
+<section class="scrolly" id="chat">
+  <div class="wrap" style="padding-top:80px">
+    <div class="kicker reveal">스크롤해서 대화 체험</div>
+    <h2 class="h2 reveal">이렇게 <span class="accent">마음을 나눠요</span></h2>
+    <p class="sub reveal">스크롤을 내리면 도란이가 네 이야기에 표정으로 반응해요.</p>
+  </div>
+  <div class="layout">
+    <!-- 고정 폰 -->
+    <div class="scrolly-sticky">
+      <div class="phone">
+        <div class="phone-head">
+          <div class="avatar"><div class="dorani" id="chat-dorani"></div></div>
+          <div>
+            <div class="nm">도란</div>
+            <div class="st"><span class="dot"></span>네 얘기 듣는 중</div>
           </div>
-          <img src="assets/shot2.png" alt="도란도란 친구 만들기 화면"/>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 스크린샷 -->
-  <section class="block" style="background:linear-gradient(180deg,#F3FBFA,#FCFAF1)">
-    <div class="wrap">
-      <div class="kicker">앱 미리보기</div>
-      <h2 class="h2">이렇게 대화해요</h2>
-      <div class="shots">
-        <div class="shot">
-          <img src="assets/shot1.png" alt="위로 채팅 화면"/>
-          <p>위로 채팅</p><span>마음을 편하게 털어놓기</span>
+        <div class="phone-body">
+          <div class="bubble ai">오늘 하루 어땠어? 별거 아니어도 다 들어줄게 :)</div>
+          <div class="bubble me">회사에서 실수해서 너무 창피해…</div>
+          <div class="bubble ai">아이고… 그 얘기 들으니까 나도 마음 아프다. 오늘 진짜 고생했네.</div>
+          <div class="bubble me">누구한테도 말 못 했는데.</div>
+          <div class="bubble ai">괜찮아, 내가 있잖아. 천천히 다 얘기해도 돼 🫶</div>
         </div>
-        <div class="shot">
-          <img src="assets/shot2.png" alt="친구 만들기 화면"/>
-          <p>친구 만들기</p><span>나에게 맞는 친구 고르기</span>
+        <p class="progress-hint">↓ 스크롤해서 대화 이어가기</p>
+      </div>
+    </div>
+    <!-- 스크롤 스텝 -->
+    <div class="scrolly-steps">
+      <div class="scrolly-step" data-step="0" data-exp="listen">
+        <span class="tag">경청</span>
+        <div class="caption">먼저, 오늘을 물어봐요</div>
+        <p class="desc">인사말은 언제나 부담 없이. 별거 아닌 하루도 다 들어줄게요.</p>
+      </div>
+      <div class="scrolly-step" data-step="1" data-exp="listen">
+        <span class="tag">털어놓기</span>
+        <div class="caption">마음속 이야기를 꺼내요</div>
+        <p class="desc">창피한 일도, 숨기고 싶던 일도. 판단받지 않으니까 편하게요.</p>
+      </div>
+      <div class="scrolly-step" data-step="2" data-exp="worry">
+        <span class="tag">공감</span>
+        <div class="caption">조언보다 공감이 먼저</div>
+        <p class="desc">“많이 속상했겠다.” 해결을 강요하지 않고, 네 감정을 먼저 알아줘요.</p>
+      </div>
+      <div class="scrolly-step" data-step="3" data-exp="worry">
+        <span class="tag">곁에</span>
+        <div class="caption">아무에게도 못 한 말까지</div>
+        <p class="desc">혼자 삼켰던 이야기, 도란이에겐 천천히 다 꺼내도 괜찮아요.</p>
+      </div>
+      <div class="scrolly-step" data-step="4" data-exp="smile">
+        <span class="tag">위로</span>
+        <div class="caption">괜찮아, 내가 있잖아</div>
+        <p class="desc">따뜻한 한마디로 하루의 무게를 조금 덜어줘요.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="block" id="why">
+  <div class="wrap">
+    <div class="kicker reveal">Why 도란도란</div>
+    <h2 class="h2 reveal">그냥 챗봇이 아니라, <span class="accent">진짜 친구</span></h2>
+    <p class="sub reveal">상담사 말투가 아니라 오랜 친구의 말투로. 공감을 먼저, 조언은 나중에.</p>
+    <div class="features">
+      <div class="card reveal d1">
+        <div class="ic i-mint">💬</div>
+        <h3>판단하지 않는 대화</h3>
+        <p>“그럴 수 있지”, “많이 속상했겠다.” 해결을 강요하지 않고 먼저 마음을 들어줘요.</p>
+      </div>
+      <div class="card reveal d2">
+        <div class="ic i-coral">🧑‍🤝‍🧑</div>
+        <h3>내가 고르는 친구</h3>
+        <p>성별·나이·말투를 골라 나에게 꼭 맞는 친구를 만들어요. 반말도, 존댓말도 좋아요.</p>
+      </div>
+      <div class="card reveal d3">
+        <div class="ic i-lav">🌙</div>
+        <h3>기억해주는 친구</h3>
+        <p>지난 이야기를 기억하고 이어가요. 대화가 쌓일수록 더 가까운 친구가 돼요.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 친구 만들기 -->
+<section class="block maker" id="maker">
+  <div class="wrap">
+    <div class="kicker reveal">Make your friend</div>
+    <h2 class="h2 reveal">너만의 <span class="accent">친구를 만들어요</span></h2>
+    <p class="sub reveal">아래를 바꿔보면 도란이가 그 자리에서 변해요.</p>
+    <div class="panel reveal">
+      <div class="maker-preview">
+        <div class="stage" id="maker-dorani"></div>
+        <div class="friend-name">도란</div>
+        <div class="friend-greet">안녕! 나랑 편하게 얘기하자 :)</div>
+      </div>
+      <div class="maker-controls">
+        <div class="grp">
+          <div class="lb">성별</div>
+          <div class="chips">
+            <button class="chip on" data-maker="gender" data-val="neutral">중립</button>
+            <button class="chip" data-maker="gender" data-val="male">남자</button>
+            <button class="chip" data-maker="gender" data-val="female">여자</button>
+          </div>
         </div>
+        <div class="grp">
+          <div class="lb">나이</div>
+          <div class="chips">
+            <button class="chip" data-maker="age" data-val="younger">연하</button>
+            <button class="chip on" data-maker="age" data-val="peer">또래</button>
+            <button class="chip" data-maker="age" data-val="elder">연상</button>
+          </div>
+        </div>
+        <p style="color:var(--slate);font-size:14px;margin-top:6px">말투(반말·존댓말)와 관심 주제는 앱에서 더 세밀하게 고를 수 있어요.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- 이용 방법 -->
-  <section class="block" id="how">
-    <div class="wrap">
-      <div class="kicker">How it works</div>
-      <h2 class="h2">3단계면 충분해요</h2>
-      <div class="steps">
-        <div class="step"><div class="num">1</div><h4>친구 만들기</h4><p>성별·나이·말투를 골라 나만의 친구를 빚어요.</p></div>
-        <div class="step"><div class="num">2</div><h4>마음 털어놓기</h4><p>오늘 하루, 고민, 비밀. 뭐든 편하게 이야기해요.</p></div>
-        <div class="step"><div class="num">3</div><h4>위로 받기</h4><p>판단 없이 들어주는 친구에게 따뜻한 공감을 받아요.</p></div>
+<!-- 대화 예시 갤러리 -->
+<section class="block gallery">
+  <div class="wrap">
+    <div class="kicker reveal">이런 순간에</div>
+    <h2 class="h2 reveal">도란이는 <span class="accent">이렇게 대답해요</span></h2>
+    <div class="convos">
+      <div class="convo reveal d1">
+        <div class="face" data-face="worry"></div>
+        <div><div class="situ">속상한 날</div><p class="msg">“그럴 수 있지. 그거 네 잘못 아니야. 오늘은 그냥 좀 쉬어도 돼.”</p></div>
       </div>
-
-      <div class="safety">
-        💛 <b>도란도란은 의료·심리 상담을 대체하지 않아요.</b> 마음이 많이 힘들 땐 언제든 전문기관(자살예방 상담전화 <b>109</b>) 또는 <b>119</b>에 도움을 요청해 주세요.
+      <div class="convo reveal d2">
+        <div class="face" data-face="cheer"></div>
+        <div><div class="situ">기쁜 소식</div><p class="msg">“헐 진짜?! 나까지 신난다 🎉 자세히 얘기해줘, 다 듣고 싶어!”</p></div>
       </div>
-    </div>
-  </section>
-
-  <!-- CTA 밴드 -->
-  <section class="band" id="band"><div class="wrap">
-    <h2>오늘 하루, 어땠어?</h2>
-    <p>별거 아니어도 괜찮아요. 도란도란이 다 들어줄게요.</p>
-    <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.systemplanners.dorandoran">📱 Google Play에서 만나기</a>
-  </div></section>
-
-  <!-- 푸터 -->
-  <footer><div class="wrap">
-    <div class="frow">
-      <a class="flogo" href="#top"><img src="assets/icon.png" alt="도란도란"/><span>도란도란</span></a>
-      <div class="flinks">
-        <a href="privacy.html">개인정보처리방침</a>
-        <a href="terms.html">이용약관</a>
-        <a href="account-deletion.html">계정·데이터 삭제</a>
+      <div class="convo reveal d1">
+        <div class="face" data-face="think"></div>
+        <div><div class="situ">막막할 때</div><p class="msg">“음… 잠깐만, 같이 생각해볼게 🤔 급하게 정하지 않아도 돼.”</p></div>
+      </div>
+      <div class="convo reveal d2">
+        <div class="face" data-face="smile"></div>
+        <div><div class="situ">늦은 밤</div><p class="msg">“안 자고 뭐 해~ 무슨 생각 중이야? 잠 안 오면 나랑 얘기하자.”</p></div>
       </div>
     </div>
-    <p class="copy">© 2026 도란도란 (DoranDoran) · 문의: longpapa82@gmail.com</p>
-  </div></footer>
+  </div>
+</section>
 
+<!-- 늦은 밤 무드 -->
+<section class="night">
+  <div class="stars" aria-hidden="true"></div>
+  <div class="wrap reveal">
+    <div class="moon">🌙</div>
+    <h2>혼자인 것 같은 밤에도,<br/>곁에 있을게</h2>
+    <p>아무에게도 못 할 이야기가 있는 밤. 도란이는 판단하지 않고 그저 들어줘요.</p>
+    <div class="qt">“오늘도 수고했어. 내일은 조금 더 괜찮을 거야.”</div>
+  </div>
+</section>
+
+<!-- 요금 -->
+<section class="block" id="plans">
+  <div class="wrap">
+    <div class="kicker reveal">Pricing</div>
+    <h2 class="h2 reveal">무료로 <span class="accent">시작해요</span></h2>
+    <p class="sub reveal">부담 없이 대화를 시작하고, 더 깊은 친구가 되고 싶을 때 프로로.</p>
+    <div class="plans">
+      <div class="plan reveal d1">
+        <h3>무료</h3>
+        <div class="price">₩0 · 부담 없이 시작</div>
+        <ul>
+          <li>매일 도란이와 대화</li>
+          <li>기본 친구 만들기</li>
+          <li>따뜻한 위로와 공감</li>
+        </ul>
+      </div>
+      <div class="plan pro reveal d2">
+        <span class="badge">추천</span>
+        <h3>프로</h3>
+        <div class="price">무제한으로 더 가까이</div>
+        <ul>
+          <li>무제한 대화</li>
+          <li>전체 아바타 · 친구 커스터마이즈</li>
+          <li>감정 기억으로 이어지는 대화</li>
+          <li>광고 없이 편안하게</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 안전 안내 -->
+<section class="block safety-band">
+  <div class="wrap reveal">
+    <div class="safety">
+      💛 <b>도란도란은 의료·심리 상담을 대체하지 않아요.</b> 도란이의 응답은 전문가의 조언을 대신하지 않습니다.
+      마음이 많이 힘들 땐 언제든 전문기관(자살예방 상담전화 <b>109</b>) 또는 <b>119</b>에 도움을 요청해 주세요.
+    </div>
+  </div>
+</section>
+
+<!-- CTA 밴드 -->
+<section class="band" id="band"><div class="wrap reveal">
+  <h2>오늘 하루, 어땠어?</h2>
+  <p>별거 아니어도 괜찮아요. 도란도란이 다 들어줄게요.</p>
+  <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.systemplanners.dorandoran">📱 Google Play에서 만나기</a>
+</div></section>
+
+<!-- FOOTER -->
+<footer class="ft"><div class="wrap">
+  <div class="frow">
+    <a class="flogo" href="#top"><img class="mark" src="assets/icon.png" alt="도란도란"/><span>도란도란</span></a>
+    <div class="flinks">
+      <a href="privacy.html">개인정보처리방침</a>
+      <a href="terms.html">이용약관</a>
+      <a href="account-deletion.html">계정·데이터 삭제</a>
+    </div>
+  </div>
+  <p class="copy">© 2026 도란도란 (DoranDoran) · 문의: longpapa82@gmail.com</p>
+</div></footer>
+
+<script src="scripts/dorani.js"></script>
+<script src="scripts/scrolly.js"></script>
+<script>
+  // 대화 예시 갤러리의 작은 도란이 표정들 마운트(안전 DOM 방식)
+  document.addEventListener("DOMContentLoaded", function(){
+    document.querySelectorAll("[data-face]").forEach(function(el){
+      if (window.mountDorani) window.mountDorani(el, {age:"peer",gender:"neutral",expression:el.getAttribute("data-face")});
+    });
+  });
+</script>
 </body></html>
