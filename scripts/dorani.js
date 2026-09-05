@@ -131,9 +131,10 @@ function doraniSVG(opts = {}) {
     .join("");
 
   const breathClass = opts.breath === false ? "" : " dorani-breath";
+  // 안테나(ant)를 몸통(body)보다 먼저 그려, 몸통이 안테나 밑동을 덮게 → 뜬 틈 방지(자연스러운 연결).
   return `<svg class="dorani${breathClass}" viewBox="0 -18 200 208" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="도란이 캐릭터">
     <g class="dorani-body">
-      ${body}${ant}${gm}${face}${blush}
+      ${ant}${body}${gm}${face}${blush}
     </g>
   </svg>`;
 }
