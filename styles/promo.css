@@ -36,12 +36,19 @@
   --t-display:clamp(3.4rem, 2rem + 3.4vw, 6.4rem);
   --t-title:clamp(2rem, 1.2rem + 2.8vw, 4.4rem);
   --t-lead:clamp(1.15rem, 0.9rem + 0.9vw, 1.6rem);
+  /* 폰트: 제목/로고=Jua(브랜드 개성), 본문/UI=Pretendard (디자인문서 §3) */
+  --font-display:'Jua','Pretendard Variable','Pretendard',sans-serif;
+  --font-body:'Pretendard Variable','Pretendard',-apple-system,sans-serif;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+/* 제목·로고·디스플레이 = Jua(브랜드 개성). 웨이트 1개라 위계는 크기로. 자간은 둥근 폰트에 맞게 완화 */
+.hero h1,.h2,.band h2,.night h2,.brand span,.eyebrow,.kicker,
+.friend-name,.plan h3,.convo-name,.phone-head .nm,.scrolly-step .caption,.card h3{
+  font-family:var(--font-display);font-weight:400;letter-spacing:normal}
 body{
-  font-family:'Pretendard Variable','Pretendard',-apple-system,sans-serif;
+  font-family:var(--font-body);
   background:var(--bg); color:var(--ink); line-height:1.65;
   -webkit-font-smoothing:antialiased;
   /* 은은한 종이 grain(아날로그 무드) */
@@ -139,10 +146,14 @@ img{max-width:100%;display:block}
 .hero .cta{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
 .btn{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:16px;
   padding:15px 28px;border-radius:var(--r-lg);transition:transform .2s var(--ease),box-shadow .2s;cursor:pointer;border:none}
-.btn-primary{background:var(--ink);color:#fff;box-shadow:0 10px 26px rgba(40,46,56,.26)}
-.btn-primary:hover{transform:translateY(-3px);box-shadow:0 18px 38px rgba(40,46,56,.32)}
+/* 앱 PrimaryButton 시그니처: 민트→피치 브랜드 그라디언트(Gradient.brandHero) */
+.btn-primary{background:linear-gradient(135deg,#B8ECE6,#FCE6DA);color:var(--ink);
+  box-shadow:0 10px 26px rgba(20,187,194,.24)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 18px 38px rgba(20,187,194,.34)}
 .btn-ghost{background:rgba(255,255,255,.72);color:var(--ink);border:1px solid rgba(255,255,255,.95)}
 .btn-ghost:hover{transform:translateY(-3px);background:#fff}
+/* 앱 눌림 반응(scale 0.97) */
+.btn:active{transform:scale(.97);transition:transform .1s ease}
 .hero-note{margin-top:16px;font-size:13.5px;color:#517072;font-weight:500}
 /* 마그네틱 버튼 — 복귀 시 부드럽게(mousemove 중엔 즉시 추종) */
 [data-magnetic]{transition:transform .35s var(--ease),box-shadow .2s}
@@ -244,7 +255,7 @@ section.block{padding:120px 0;position:relative}
 .typing{align-self:flex-start;display:none;gap:5px;padding:12px 16px;background:var(--bubble-ai);
   border:1px solid var(--line);border-radius:18px;border-bottom-left-radius:6px;box-shadow:var(--shadow-card)}
 .typing.show{display:flex}
-.typing span{width:7px;height:7px;border-radius:50%;background:var(--mist);animation:typingDot 1.2s ease-in-out infinite}
+.typing span{width:7px;height:7px;border-radius:50%;background:var(--mint-dark);animation:typingDot 1.2s ease-in-out infinite}
 .typing span:nth-child(2){animation-delay:.18s}
 .typing span:nth-child(3){animation-delay:.36s}
 @keyframes typingDot{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-4px)}}
