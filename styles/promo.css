@@ -139,9 +139,7 @@ img{max-width:100%;display:block}
   color:var(--mint-dark);font-weight:700;font-size:14px;padding:8px 16px;border-radius:var(--r-pill);
   border:1px solid rgba(255,255,255,.9);margin-bottom:22px}
 .hero h1{font-size:var(--t-display);line-height:1.08;letter-spacing:-3px;font-weight:800}
-.hero h1 .accent{color:var(--mint-dark);position:relative;display:inline-block;white-space:nowrap}
-.hero h1 .accent::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:10px;
-  background:var(--coral);opacity:.28;border-radius:6px;z-index:-1}
+.hero h1 .accent{color:var(--mint-dark);display:inline-block;white-space:nowrap}
 .hero .lede{margin-top:20px;font-size:var(--t-lead);color:#3C4A4C;max-width:30ch}
 .hero .cta{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
 .btn{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:16px;
