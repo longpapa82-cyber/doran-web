@@ -139,7 +139,12 @@ img{max-width:100%;display:block}
   color:var(--mint-dark);font-weight:700;font-size:14px;padding:8px 16px;border-radius:var(--r-pill);
   border:1px solid rgba(255,255,255,.9);margin-bottom:22px}
 .hero h1{font-size:var(--t-display);line-height:1.08;letter-spacing:-3px;font-weight:800}
-.hero h1 .accent{color:var(--mint-dark);display:inline-block;white-space:nowrap}
+/* accent: 손그림 형광펜 하이라이트(승인 시안 의도 — accent-soft, -0.6도 기울임) */
+.hero h1 .accent{color:var(--mint-dark);position:relative;display:inline-block;white-space:nowrap;isolation:isolate}
+.hero h1 .accent::after{content:"";position:absolute;left:1%;right:1%;bottom:.12em;height:.28em;z-index:-1;
+  background:var(--coral);border-radius:7px;transform:rotate(-.6deg);
+  /* 민트 배경과 대비되는 따뜻한 코랄 형광펜(승인 시안 손그림 의도). 깜빡임 방지: 자체 transition 없이 정적 */
+  opacity:.55}
 .hero .lede{margin-top:20px;font-size:var(--t-lead);color:#3C4A4C;max-width:30ch}
 .hero .cta{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
 .btn{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:16px;
