@@ -466,7 +466,14 @@ footer.ft{padding:56px 0 64px;border-top:1px solid var(--line)}
 .ft .flogo:hover .mark{transform:rotate(-6deg) scale(1.06)}
 .ft .flinks{display:flex;gap:22px;font-size:14.5px;font-weight:600;color:var(--slate);flex-wrap:wrap}
 .ft .flinks a:hover{color:var(--mint-dark)}
-.ft .copy{color:var(--slate);font-size:13px;margin-top:22px}
+/* 전자상거래법 §10 사업자 신원정보 — 저채도 회색으로 은은하게 */
+.biz-info{margin-top:22px;display:flex;flex-wrap:wrap;gap:7px 20px;
+  color:var(--mist);font-size:12.5px;line-height:1.6}
+.biz-info span{position:relative}
+.biz-info span:not(:last-child)::after{content:"·";position:absolute;right:-12px;color:var(--line)}
+.biz-info a{color:inherit}.biz-info a:hover{color:var(--slate)}
+.ft .copy{color:var(--slate);font-size:13px;margin-top:14px}
+@media(max-width:640px){.biz-info{gap:5px 14px;font-size:12px}}
 
 /* ============================================================
    reduced motion — 모든 모션 off, 콘텐츠는 정적으로 완결
